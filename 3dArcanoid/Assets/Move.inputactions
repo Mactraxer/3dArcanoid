@@ -1,0 +1,55 @@
+{
+    "name": "Move",
+    "maps": [
+        {
+            "name": "Move",
+            "id": "9bd1d42a-d8ce-4a6a-802d-ed8aaabe2287",
+            "actions": [
+                {
+                    "name": "Horizontal move",
+                    "type": "Value",
+                    "id": "7aeff916-4a81-4574-87d2-1960c724bc98",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Arrows",
+                    "id": "0ede4fc5-1c2f-4269-9e86-e61f38637eb3",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f61a0847-2c08-43d6-969e-29611865d693",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "c50d84da-9fa7-47a9-896a-7dce31bc0716",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
