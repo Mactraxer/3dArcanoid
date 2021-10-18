@@ -4,11 +4,12 @@ public class StageCreator : MonoBehaviour
 {
     [SerializeField] GameObject wallPrefab;
     [SerializeField] GameObject platePrefab;
+    private float offset = 4f;
 
     public void CreateStageByMap(int[,] stageMap)
     {
-        int dimentionXSize = stageMap.GetUpperBound(0) + 1;
-        int dimentionYSize = stageMap.GetUpperBound(1) + 1;
+        float dimentionXSize = stageMap.GetUpperBound(0) + offset;
+        float dimentionYSize = stageMap.GetUpperBound(1) + offset;
 
         GameObject leftWall = Instantiate(wallPrefab, new Vector3(-dimentionXSize / 2 - 0.5f, 1, dimentionYSize / 2), Quaternion.identity);
         leftWall.transform.localScale = new Vector3(1, 2, dimentionYSize);
@@ -24,7 +25,7 @@ public class StageCreator : MonoBehaviour
 
 
         GameObject plate = Instantiate(platePrefab, new Vector3(0, 0, dimentionYSize / 2), Quaternion.identity);
-        plate.transform.localScale = new Vector3(dimentionXSize / 10, 1, dimentionYSize / 10);
+        plate.transform.localScale = new Vector3(dimentionXSize / 10f, 1, dimentionYSize / 10f);
 
 
     }
