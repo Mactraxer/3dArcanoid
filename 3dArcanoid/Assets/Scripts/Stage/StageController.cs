@@ -1,15 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class StageController : MonoBehaviour
+[RequireComponent(typeof (StageCreator))]
+[RequireComponent(typeof (ArrayMap))]
+public class StageController : MonoBehaviour, IBrickDelegate
 {
     private StageCreator stageCreator;
     private ArrayMap mapConvertor;
+    private BricksController brickController;
 
-    private BrickCreator brickCreator;
-    private BrickDestoyControl brickDestoyControl;
-
-    private Brick[,] bricks;
-    private int[,] brickMap;
+    [SerializeField]
+    private Text brickCount;
 
     private int[,] stageMap;
 
@@ -18,7 +19,8 @@ public class StageController : MonoBehaviour
     void Start()
     {
         SetupController();
-        GenerateMap();   
+        GenerateMap();
+        UpdateBrickCountLabel();
     }
 
     private void GenerateMap()
@@ -31,19 +33,32 @@ public class StageController : MonoBehaviour
     {
         stageCreator = GetComponent<StageCreator>();
         stageCreator.CreateStageByMap(stageMap);
-        GenerateBricks();
+        brickController.GenerateBricks(stageMap, this);
     }
 
-    private void GenerateBricks()
+    private void StageComplete()
     {
-        bricks = brickCreator.CreateBricksByMap(stageMap, brickDestoyControl.DestroyBrick, brickDestoyControl.BrickCollision);
+        Debug.Log("Stage Clear");
     }
 
     public void SetupController()
     {
-        brickCreator = GetComponent<BrickCreator>();
-        brickDestoyControl = GetComponent<BrickDestoyControl>();
+        brickController = GameObject.FindGameObjectWithTag("BricksManager").GetComponent<BricksController>();
         mapConvertor = GetComponent<ArrayMap>();
     }
 
+    void IBrickDelegate.AllBricksDestroyed()
+    {
+        StageComplete();
+    }
+
+    void IBrickDelegate.BrickDestroyed()
+    {
+        UpdateBrickCountLabel();
+    }
+
+    private void UpdateBrickCountLabel()
+    {
+        brickCount.text = $"remained {brickController.BrickCount}";
+    }
 }
